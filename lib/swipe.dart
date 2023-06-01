@@ -30,6 +30,12 @@ class Swipe extends StatelessWidget {
   /// Default: 100
   final double verticalMinDisplacement;
 
+  /// minimum starting point of pointer moving on the horizontal axis
+  /// to be counted as a swipe
+  ///
+  /// Default: 100
+  final double horizontalMinimumStartingPoint;
+
   /// minimum absolute velocity of pointer moving on the vertical axis
   /// to be counted as a swipe
   ///
@@ -63,6 +69,7 @@ class Swipe extends StatelessWidget {
     this.horizontalMaxHeightThreshold = 50,
     this.horizontalMinDisplacement = 100,
     this.horizontalMinVelocity = 300,
+    this.horizontalMinimumStartingPoint = 100,
   });
 
   @override
@@ -124,6 +131,8 @@ class Swipe extends StatelessWidget {
               .abs();
           double velocity = endDetails.primaryVelocity ?? 0.0;
 
+          if (startHorizontalDragDetails!.globalPosition.dx >
+              horizontalMinimumStartingPoint) return;
           if (dy > horizontalMaxHeightThreshold) return;
           if (dx < horizontalMinDisplacement) return;
           if (velocity.abs() < horizontalMinVelocity) return;
