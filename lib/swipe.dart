@@ -57,6 +57,8 @@ class Swipe extends StatelessWidget {
   /// Default: 300
   final double horizontalMinVelocity;
 
+  final HitTestBehavior hitTestBehavior;
+
   Swipe({
     required this.child,
     this.onSwipeUp,
@@ -70,6 +72,7 @@ class Swipe extends StatelessWidget {
     this.horizontalMinDisplacement = 100,
     this.horizontalMinVelocity = 300,
     this.horizontalMinimumStartingPoint = 100,
+    this.hitTestBehavior = HitTestBehavior.deferToChild,
   });
 
   @override
@@ -82,6 +85,7 @@ class Swipe extends StatelessWidget {
 
     return GestureDetector(
       child: child,
+      behavior: hitTestBehavior,
       onVerticalDragStart: (dragDetails) {
         startVerticalDragDetails = dragDetails;
       },
